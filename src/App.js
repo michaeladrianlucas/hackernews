@@ -1,5 +1,4 @@
-import React, { Component }
-from 'react';
+import React, { Component }from 'react';
 import './App.css';
 const list = [
   {
@@ -19,14 +18,18 @@ const list = [
   },
 ];
 class App extends Component {
-  render() {
+  constructor(props){
+    super(props);
 
+    this.state = {
+      list: list,
+    };
+  }
+  render() {
     return (
       <div className="App">
-
         {
-          list.map( (item) =>
-
+          this.state.list.map( (item) =>
                 <div key={item.objectID}>
                  <span>
                    <a href={item.url}>{item.title}</a>
@@ -35,13 +38,10 @@ class App extends Component {
                  <span>{item.num_comments}</span>
                  <span>{item.points}</span>
                </div>
-
         ) //END FUNCTION
       }
-
     </div>//END APP
-
-    ); //END RETURN*/
+    ); //END RETURN
   } //END RENDER
 } //END APP
 
@@ -63,4 +63,22 @@ export default App;
         }) //END FUNCTION
         //END LIST MAP
     }
+    render() {
+      return (
+        <div className="App">
+          {
+            list.map( (item) =>
+                  <div key={item.objectID}>
+                   <span>
+                     <a href={item.url}>{item.title}</a>
+                   </span>
+                   <span>{item.autor}</span>
+                   <span>{item.num_comments}</span>
+                   <span>{item.points}</span>
+                 </div>
+          ) //END FUNCTION
+        }
+      </div>//END APP
+      ); //END RETURN
+    } //END RENDER
     */
