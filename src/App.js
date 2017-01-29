@@ -125,7 +125,7 @@ class Table extends Component {
                  <button
                    onClick={() =>
                    onDismiss(item.objectID) }
-                   type="button">Dismiss</button>
+                 >Dismiss</button>
                </span>
              </div>
       )}
@@ -133,6 +133,24 @@ class Table extends Component {
     );
   }
 } //END CLASS TABLE
+
+class Button extends Component{
+  render(){
+    const {
+      onClick,
+      className = '',
+      children
+    } = this.props;
+
+    return (
+      <button
+        onClick={onClick}
+        className={className}
+        type="button">
+        {children}</button>
+    );
+  }
+} //END CLASS BUTTON
 /*
 // POSSIBLE COMPONENTS
 <Search
