@@ -46,19 +46,25 @@ class App extends Component {
   }
 
   onDismiss(id) {
-    function isNotId(item){
-      return item.objectID !== id;
-    }
+
+    const isNotId = item => item.objectID !==id;
+
     const updatedList = this.state.list.filter(isNotId);
       this.setState({ list: updatedList });
+    /*
+    function isNotId(item){
+      return item.objectID !== id;
+    }*/
+    // refactored to arrow function
+    /* or in ES6 aarrow function
+    onDismiss(id){
+    const isNotId = item => item.objectID !==id;
+    const updatedList = this.state.list.filter(isNotId);
+    this.setState({ list: updatedList });
   }
-  /* or in ES6 aarrow function
-  onDismiss(id){
-  const isNotId = item => item.objectID !==id;
-  const updatedList = this.state.list.filter(isNotId);
-  this.setState({ list: updatedList });
-}
-  */
+    */
+  }
+
   render() {
 
     const {
@@ -67,18 +73,19 @@ class App extends Component {
     } = this.state;
 
     return (
-      <div className="App">
-      <Search
-          value={searchTerm}
-          onChange={this.onSearchChange}>
-      Search</Search>
+      <div className="page">
+       <div className="interactions" >
+        <Search
+            value={searchTerm}
+            onChange={this.onSearchChange}>
+        Search</Search>
 
-      <Table
-          list={list}
-          pattern={searchTerm}
-          onDismiss={this.onDismiss}
-      />
-
+        <Table
+            list={list}
+            pattern={searchTerm}
+            onDismiss={this.onDismiss}
+        />
+     </div>
     </div>//END APP
     ); //END RETURN
   } //END RENDER
@@ -106,21 +113,20 @@ class App extends Component {
       onDismiss
     }) => {
       return(
-        <div>
+        <div className="table">
         {
           list.filter(isSearched(pattern)).map(item =>
-                <div key={item.objectID}>
-                 <span>
+                <div key={item.objectID} className="table-row">
+                 <span style={{width: '40%'}}>
                    <a href={item.url}>{item.title}</a>
                  </span>
-                 <span>{item.author}</span>
-                 <span>{item.num_comments}</span>
-                 <span>{item.points}</span>
-                 <span>
+                 <span style={{width: '30%'}}>{item.author}</span>
+                 <span style={{width: '10%'}}>{item.num_comments}</span>
+                 <span style={{width: '10%'}}>{item.points}</span>
+                 <span style={{width: '10%'}}>
                    <button
-                     onClick={() =>
-                     onDismiss(item.objectID) }
-                   >Dismiss</button>
+                     onClick={() => onDismiss(item.objectID)}
+                   className="button-inline">Dismiss</button>
                  </span>
                </div>
         )}
@@ -141,6 +147,7 @@ class App extends Component {
            {children}</button>
        );
      }
+export default App;
 /*
 class Button extends Component{
   render(){
@@ -274,7 +281,7 @@ class Table extends Component {
   } // END RENDER
 } //END CLASS TABLE
 */
-export default App;
+
 /*
 // first {} is where react injects data
     {
